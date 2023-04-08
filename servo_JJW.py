@@ -18,6 +18,7 @@ pygame.joystick.init()
 
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
+K=0
 
 while True:
     for event in pygame.event.get():
@@ -26,8 +27,14 @@ while True:
                 value = joystick.get_axis(0)
                 
                 angle=(value+1)/2*180.0
-                
-                pwm.ChangeDutyCycle(angle/18+2)
+
+                if angle==0:
+                    K=K+1
+                    if K<=10:
+                        pwm.ChangeDutyCycle(angle / 18 + 2)
+                elif:
+                    K=0
+                    pwm.ChangeDutyCycle(angle / 18 + 2)
                 
         elif event.type == pygame.JOYBUTTONDOWN:
             if event.button == 9:
